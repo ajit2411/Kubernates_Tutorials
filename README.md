@@ -1,4 +1,4 @@
-![image](https://github.com/ajit2411/Kubernates_Tutorials/assets/85279609/f6f57a17-bacb-448b-b8e6-bbbe124dda54)# Kubernates_Tutorials
+# Kubernates_Tutorials
 
 ## Setup Kubernetes Cluster on Amazon (EKS)
 
@@ -143,7 +143,7 @@ eksctl create cluster --name myeks08 --version 1.25 --region us-east-1 --nodegro
 eksctl create cluster --name myeks12 --version 1.25 --region us-east-1 --nodegroup-name ngmyeks12 --node-type t2.micro --nodes 3
 ```
    
-5. Validate your cluster using by creating by checking nodes and by creating a pod 
+5. Validate your cluster by checking nodes and creating pods 
 ```
 kubectl get nodes
 kubectl run pod tomcat --image=tomcat 
@@ -153,9 +153,9 @@ kubectl run --image tomcat webserver
 kubectl create namespace dev
 kubectl get svc --all-namespaces
 kubectl config use-context dev
-
+```
 Ex1:  Create a pod definition file to start nginx in a pod.
-
+```
 vi  pod.yml
 ---
 apiVersion: v1
@@ -198,9 +198,9 @@ kubectl get all -A (browse external-ip of the service mypod-lb)
 e.g. http://a8cdd2fd5c811413a9dc61caf41751fe-764973405.us-east-1.elb.amazonaws.com/
 kubectl delete pod mypod
 kubectl delete svc mypod-lb
-
+```
 Ex2:  Create  a replication controller for creating 3 replicas of httpd
-
+```
 vi  replication-controller.yml
 ---
 apiVersion: v1
@@ -233,9 +233,9 @@ kubectl  get nodes -o wide
 Take external IP ( Public IP ) of any node 
 Open firewall port 8080 and browse it >> http://35.239.250.215:8080
 kubectl delete -f replication-controller.yml (Delete the replicas )
-
+```
 Ex3:  Create a replicaset file to start 4 tomcat replicas and then perform scaling
-
+```
 vi replica-set.yml
 ---
 apiVersion: apps/v1
@@ -275,9 +275,9 @@ kubectl  get pods  ( We should get 6 pods )
 Option 2: 
 kubectl scale --replicas=2 -f replica-set.yml
 kubectl  get pods  ( We should get 2 pods )
-
+```
 Ex4: Create deployment file to run ngnix 1.7.9 with 3 replicas, later rolling update to ngnix 1.9.1
-
+```
 vi  deployment.yml
 ---
 apiVersion: apps/v1
@@ -315,9 +315,9 @@ kubectl --record deployment.apps/nginx=deployment set image deployment.v1.app/ng
 We get a message - image got updated
 kubectl  get pods (watch status)
 kubectl describe pods <pod-name> | less
-
+```
 Ex5: Create Service file to run ngnix
-
+```
 vi service.yml
 ---
 apiVersion: v1
